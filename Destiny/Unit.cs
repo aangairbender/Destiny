@@ -29,7 +29,7 @@ namespace Destiny
        {
            return sprite;
        }
-       public void makeMove(World world)
+       public abstract void makeMove(World world)
        {
 
        }
