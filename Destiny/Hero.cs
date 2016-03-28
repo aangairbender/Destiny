@@ -19,7 +19,8 @@ namespace Destiny
             this.direction = 0;
             this.sprite[0] = sprite;
             //asdasdвылдвалвыываыва
-            //asfsdaf
+            //asfsda
+            //sf
             
         }
     }
