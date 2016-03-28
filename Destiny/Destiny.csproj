@@ -53,6 +53,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Hero.cs" />
+    <Compile Include="IdManager.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Monster.cs" />
