@@ -20,5 +20,14 @@ namespace Destiny
        {
            this.location = newLocation;
        }
+       
+       public void setSprite(String newSprite)
+       {
+           this.sprite = newSprite;
+       }
+       public String getSprite()
+       {
+           return sprite;
+       }
     }
 }

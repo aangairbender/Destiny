@@ -12,7 +12,7 @@ namespace Destiny
         public String tile;
         public String decoration;
         public List<Item> itemsLying;
-        public Unit actorStanding;
+        public Unit unitStanding;
 
         public Cell(String tile, String decoration, bool passable)
         {
