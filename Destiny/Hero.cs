@@ -14,7 +14,6 @@ namespace Destiny
         public Hero(Point location)
         {
             this.location = location;
-            this.id = 1;
             this.hp = 100;
             this.attack = 5;
         }

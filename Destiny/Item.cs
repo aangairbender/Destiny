@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Destiny
 {
-    class Item : GameObject
+    class Item 
     {
-        ///asdfsdf
+        string sprite;
     }
 }

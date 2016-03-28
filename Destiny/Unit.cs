@@ -11,7 +11,7 @@ namespace Destiny
     {
        protected Point location;
        protected int direction;
-       protected String[] sprite;
+       protected String sprite;
        public Point getLocation()
        {
            return location;

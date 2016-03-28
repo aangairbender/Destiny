@@ -9,8 +9,8 @@ namespace Destiny
 {
     class Monster:Unit
     {
-        int hp;
-        int attack;
+        protected int hp;
+        protected int attack;
         public Monster(Point location)
         {
             this.location = location;
