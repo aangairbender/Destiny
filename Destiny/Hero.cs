@@ -11,14 +11,12 @@ namespace Destiny
     {
         int hp;
         int attack;
-        public Hero(int id,Point location,String sprite,int hp, int attack)
+        public Hero(Point location)
         {
-            this.hp = hp;
-            this.attack = attack;
             this.location = location;
-            this.direction = 0;
-            this.sprite[0] = sprite;
-            
+            this.id = 1;
+            this.hp = 100;
+            this.attack = 5;
         }
     }
 }

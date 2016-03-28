@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Destiny
 {
-    class GameObject
+    class Spider:Monster
     {
-        protected int id;
 
-        public int getId()
-        {
-            return id;
-            
-        }
-		
     }
 }
