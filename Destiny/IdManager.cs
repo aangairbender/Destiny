@@ -8,7 +8,7 @@ namespace Destiny
 {
     class IdManager
     {
-        private int counter;
+        public int counter;
         public IdManager()
         {
             counter = 0;

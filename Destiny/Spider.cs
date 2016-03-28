@@ -16,6 +16,10 @@ namespace Destiny
             this.direction = 0;
             this.sprite = "spider";
         }
+        public override void makeMove(World world)
+        {
+
+        }
 
     }
 }

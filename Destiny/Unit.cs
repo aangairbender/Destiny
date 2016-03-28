@@ -9,9 +9,9 @@ namespace Destiny
 {
     class Unit 
     {
-       protected Point location;
-       protected int direction;
-       protected String sprite;
+       public Point location;
+       public int direction;
+       public String sprite;
        public Point getLocation()
        {
            return location;
@@ -19,6 +19,10 @@ namespace Destiny
        public void setLocation(Point newLocation)
        {
            this.location = newLocation;
+       }
+       public void makeMove(World world)
+       {
+
        }
     }
 }

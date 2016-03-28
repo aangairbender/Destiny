@@ -9,8 +9,8 @@ namespace Destiny
 {
     class Hero:Unit
     {
-        int hp;
-        int attack;
+        public int hp;
+        public int attack;
         public Hero(Point location)
         {
             this.location = location;
