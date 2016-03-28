@@ -8,9 +8,9 @@ namespace Destiny
 {
     class Map
     {
-        private int width;
-        private int height;
-        private Cell[,] cells;
+        public int width;
+        public int height;
+        public Cell[,] cells;
 
         private void generate()
         {
