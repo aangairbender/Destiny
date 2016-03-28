@@ -8,6 +8,6 @@ namespace Destiny
 {
     class Item 
     {
-        string sprite;
+        public string sprite;
     }
 }
