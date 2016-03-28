@@ -16,6 +16,7 @@ namespace Destiny
             this.location = location;
             this.hp = 100;
             this.attack = 5;
+            this.sprite = "player";
         }
     }
 }

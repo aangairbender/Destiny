@@ -12,7 +12,7 @@ namespace Destiny
     {
         public Map map;
         public List<Unit> units;
-        public Hero player;
+        public Hero hero;
         public List<Item> items;
         public BitmapCollection bc;
         private Random rand;
@@ -32,13 +32,13 @@ namespace Destiny
                 for(int j=0;j<map.getHeight() && !placed;++j) 
                     if(map[i,j].isPassable() && map[i,j].getTile() == "wood")
                     {
-                        player = new Hero(new Point(i, j));
+                        hero = new Hero(new Point(i, j));
                         placed = true;
                     }
 
-            units.Add(player);
-            map[player.getLocation().X, player.getLocation().Y].unitStanding = player;
-            map[player.getLocation().X, player.getLocation().Y].passable = false;
+            units.Add(hero);
+            map[hero.getLocation().X, hero.getLocation().Y].unitStanding = hero;
+            map[hero.getLocation().X, hero.getLocation().Y].passable = false;
 
             ///////////////
 
@@ -79,7 +79,7 @@ namespace Destiny
                     }
                 }
 
-            //g.DrawString(player.hp.ToString() + "/" + (player.astr * 10).ToString(), new Font("Arial", 16), new SolidBrush(Color.Red), new PointF(0, 0));
+            //g.DrawString(hero.hp.ToString() + "/" + (hero.astr * 10).ToString(), new Font("Arial", 16), new SolidBrush(Color.Red), new PointF(0, 0));
 
         }
 

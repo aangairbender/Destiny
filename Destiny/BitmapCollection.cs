@@ -20,7 +20,7 @@ namespace Destiny
                 DirectoryInfo[] di = dir.GetDirectories();
                 foreach(var subdir in di)
                 {
-                    FileInfo[] files = subdir.GetFiles();
+                    FileInfo[] files = subdir.GetFiles("*.bmp");
                     String category = subdir.Name;
                     foreach(var file in files)
                     {
