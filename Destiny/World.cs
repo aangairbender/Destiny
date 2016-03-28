@@ -20,12 +20,13 @@ namespace Destiny
         
         public World(int width, int height)
         {
+            idManager = new IdManager();
             rand = new Random(DateTime.Now.Millisecond);
             bc = new BitmapCollection();
             map = new Map(width, height);
             units = new List<Unit>();
             items = new List<Item>();
-            player = new Hero(idManager.next(), "player", 100, 10);
+            player = new Hero()
 
             bool placed = false;
             for(int i=0;i<map.getWidth() && !placed;++i)

@@ -18,7 +18,6 @@ namespace Destiny
             this.location = location;
             this.direction = 0;
             this.sprite[0] = sprite;
-            //asdasdвылдвалвы
             
         }
     }
