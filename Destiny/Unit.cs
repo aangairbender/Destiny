@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Destiny
 {
-    class Unit : GameObject
+    class Unit 
     {
        protected Point location;
        protected int direction;
