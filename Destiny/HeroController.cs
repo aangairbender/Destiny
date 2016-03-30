@@ -24,7 +24,7 @@ namespace Destiny
             int dir = world.hero.direction;
             world.map[px, py].unitStanding = null; 
             world.map[px, py].passable = true;
-            int npx = x, npy = y, ndir = dir;
+            int npx = world.hero.location.X, npy = world.hero.location.Y, ndir = dir;
 
             switch (keyCode)
             {
