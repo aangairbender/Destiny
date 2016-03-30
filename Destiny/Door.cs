@@ -9,15 +9,22 @@ namespace Destiny
 {
     class Door : Obj
     {
-        private String state;
         public Door(Point location, String sprite) : base(location, sprite)
         {
-            state = "closed";
+            passable = false;
         }
-        public bool activate()
+        public override bool activate()
         {
-            if (state == "closed") sprite.Replace("closed", "opened");
-            else sprite.Replace("opened", "closed");
+            if (sprite.Contains("closed"))
+            {
+                sprite = sprite.Replace("closed", "opened");
+                passable = true;
+            }
+            else
+            {
+                sprite = sprite.Replace("opened", "closed");
+                passable = false;
+            }
             return true;
         }
     }

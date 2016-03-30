@@ -37,6 +37,7 @@ namespace Destiny
                         objects.Add(d);
                         map[i, j].decoration = "";
                         map[i, j].objStanding = d;
+                        map[i, j].passable = d.passable;
                         
                     }
 
@@ -60,7 +61,7 @@ namespace Destiny
 
 
 
-
+            updateCells();
         }
         private void placeUnit(Unit unit)
         {
@@ -113,12 +114,23 @@ namespace Destiny
             {
                 a.makeMove(this);
             }
+            updateCells();
         }
 
         public int calcDmg(AttackInfo atk,DefendInfo def)
         {
             if(def.armor>=0)return Convert.ToInt32( atk.dmg*(0.06 * def.armor) / (1 + 0.06 * def.armor) );
             else return Convert.ToInt32(atk.dmg * (1-Math.Pow(0.94,-def.armor)) );
+        }
+
+        public void updateCells()
+        {
+            for (int i = 0; i < map.width; ++i)
+                for (int j = 0; j < map.height; ++j)
+                {
+                    if (map[i, j].unitStanding != null) map[i, j].passable = false;
+                    if (map[i, j].objStanding != null) map[i, j].passable = map[i, j].objStanding.passable;
+                }
         }
 
     }

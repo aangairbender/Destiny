@@ -72,6 +72,15 @@ namespace Destiny
                         }
                         break;
                     }
+                case Keys.E:
+                    {
+                        np = Utils.movePoint(world.hero.location, world.hero.direction);
+                        if(world.map[np.X, np.Y].objStanding != null)
+                        {
+                            world.map[np.X, np.Y].objStanding.activate();
+                        }
+                        break;
+                    }
                 default:
                     {
                         moveMade = false;
