@@ -103,6 +103,10 @@ namespace Destiny
                         {
                             g.DrawRectangle(new Pen(Color.Black), i * 32 + 2, j * 32, 28, 2);
                             g.FillRectangle(new SolidBrush(Color.Red), i * 32 + 2, j * 32, 28 * ((Monster)map[i, j].unitStanding).hp / ((Monster)map[i, j].unitStanding).maxhp, 2);
+                        }else
+                        {
+                            g.DrawRectangle(new Pen(Color.Black), i * 32 + 2, j * 32, 28, 2);
+                            g.FillRectangle(new SolidBrush(Color.Red), i * 32 + 2, j * 32, 28 * ((Hero)map[i, j].unitStanding).hp / ((Hero)map[i, j].unitStanding).maxhp, 2);
                         }
                     }
                 }

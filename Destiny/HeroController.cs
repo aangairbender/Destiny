@@ -64,6 +64,26 @@ namespace Destiny
                     world.placeUnit(fef);
                     break;
                 }
+                case Keys.T:
+                {
+                    world.hero.inventory.Add(new Sword1());
+                    break;
+                }
+                case Keys.Y:
+                {
+                    if(world.hero.inventory.Count==0)break;
+                    if (world.hero.inventory.Last().canEquip(world.hero))
+                    {
+                        world.hero.inventory.Last().equip(world.hero);
+                        world.hero.inventory.Remove(world.hero.inventory.Last());
+                    }
+                    break;
+                }
+                case Keys.U:
+                {
+                    world.hero.slot[0].unequip(world.hero);
+                    break;
+                }
                 case Keys.A:
                     {
                         np = Utils.movePoint(world.hero.location, world.hero.direction);

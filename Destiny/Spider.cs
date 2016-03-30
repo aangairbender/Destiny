@@ -12,7 +12,7 @@ namespace Destiny
         public Spider()
         {
             this.attack = 1;
-            this.hp = 5;
+            this.hp = 50;
             this.maxhp = hp;
             this.direction = 0;
             this.atk.dmg = this.attack;
