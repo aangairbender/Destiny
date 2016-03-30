@@ -47,6 +47,7 @@
     <Compile Include="AttackInfo.cs" />
     <Compile Include="BitmapCollection.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="DefendInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
