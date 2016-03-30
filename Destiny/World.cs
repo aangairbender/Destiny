@@ -12,6 +12,7 @@ namespace Destiny
     {
         public Map map;
         public List<Unit> units;
+        public List<Obj> objects;
         public Hero hero;
         public List<Item> items;
         public BitmapCollection bc;
@@ -27,6 +28,18 @@ namespace Destiny
             map = new Map(width, height);
             units = new List<Unit>();
             items = new List<Item>();
+            objects = new List<Obj>();
+            for (int i = 0; i < width; ++i)
+                for (int j = 0; j < height; ++j) 
+                    if(map[i, j].decoration.Contains("door"))
+                    {
+                        Door d = new Door(new Point(i, j), map[i, j].decoration);
+                        objects.Add(d);
+                        map[i, j].decoration = "";
+                        map[i, j].objStanding = d;
+                        
+                    }
+
             heroController = new HeroController(this);
 
             bool placed = false;
@@ -37,6 +50,7 @@ namespace Destiny
                         hero = new Hero(new Point(i, j));
                         placed = true;
                     }
+
 
             units.Add(hero);
             map[hero.getLocation().X, hero.getLocation().Y].unitStanding = hero;
@@ -71,12 +85,20 @@ namespace Destiny
                 {
                     g.DrawImage(bc["tiles"][map[i, j].getTile()], i * 32, j * 32);
                     if (map[i, j].hasDecoration()) g.DrawImage(bc["decorations"][map[i, j].getDecoration()], i * 32, j * 32);
+                    
                     if (map[i, j].itemsLying.Count > 1) g.DrawImage(bc["items"]["sack"], i * 32, j * 32);
                     else if (map[i, j].itemsLying.Count == 1) g.DrawImage(bc["items"][map[i,j].itemsLying[0].sprite], i * 32, j * 32);
+                    
+                    if (map[i, j].objStanding != null)
+                    {
+                        g.DrawImage(bc["objects"][map[i, j].objStanding.sprite], i * 32, j * 32);
+                        //g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
+                        //g.FillRectangle(new SolidBrush(Color.Red), i * 32+2, j * 32, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
+                    }
                     if (map[i, j].unitStanding != null)
                     {
                         g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * 32, j * 32);
-                        g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
+                        //g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
                         //g.FillRectangle(new SolidBrush(Color.Red), i * 32+2, j * 32, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
                     }
                 }
