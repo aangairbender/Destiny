@@ -13,6 +13,7 @@ namespace Destiny
         public int attack;
         public Hero(Point location)
         {
+            this.direction = 0;
             this.location = location;
             this.hp = 100;
             this.attack = 5;

@@ -9,9 +9,14 @@ namespace Destiny
 {
     class Unit 
     {
-       protected Point location;
-       protected int direction;
-       protected String sprite;
+       public Point location;
+       public int direction;
+        // 0 - верх
+        // 1 - право
+        // 2 - низ
+        // 3 - лево
+       public String sprite;
+       
        public Point getLocation()
        {
            return location;
