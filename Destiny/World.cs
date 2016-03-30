@@ -17,6 +17,7 @@ namespace Destiny
         public BitmapCollection bc;
         private Random rand;
         private IdManager idManager;
+        public HeroController heroController;
         
         public World(int width, int height)
         {
@@ -26,6 +27,7 @@ namespace Destiny
             map = new Map(width, height);
             units = new List<Unit>();
             items = new List<Item>();
+            heroController = new HeroController(this);
 
             bool placed = false;
             for(int i=0;i<map.getWidth() && !placed;++i)
