@@ -73,7 +73,7 @@ namespace Destiny
                     else if (map[i, j].itemsLying.Count == 1) g.DrawImage(bc["items"][map[i,j].itemsLying[0].sprite], i * 32, j * 32);
                     if (map[i, j].unitStanding != null)
                     {
-                        g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()], i * 32, j * 32);
+                        g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * 32, j * 32);
                         g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
                         //g.FillRectangle(new SolidBrush(Color.Red), i * 32+2, j * 32, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
                     }
