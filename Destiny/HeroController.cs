@@ -18,7 +18,7 @@ namespace Destiny
         public bool makeMove(Keys keyCode)
         {
             bool moveMade = true;
-            switch(keyCode)
+            switch (keyCode)
             {
                 case Keys.Up:
                     {
