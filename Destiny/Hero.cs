@@ -11,6 +11,7 @@ namespace Destiny
     {
         public int hp;
         public int attack;
+        AttackInfo HeroBaseAttack;
         public Hero(Point location)
         {
             this.direction = 0;
@@ -18,6 +19,8 @@ namespace Destiny
             this.hp = 100;
             this.attack = 5;
             this.sprite = "player";
+            AttackInfo HeroBaseAttack = new AttackInfo();
+            HeroBaseAttack.dmg = 5;
         }
     }
 }

@@ -9,5 +9,9 @@ namespace Destiny
     class AttackInfo
     {
         public int dmg;
+        public AttackInfo()
+        {
+            this.dmg = 0;
+        }
     }
 }
