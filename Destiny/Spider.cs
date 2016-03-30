@@ -9,10 +9,11 @@ namespace Destiny
 {
     class Spider:Monster
     {
-        public Spider(Point location):base(location)
+        public Spider()
         {
             this.attack = 1;
-            this.hp = 1;
+            this.hp = 5;
+            this.maxhp = hp;
             this.direction = 0;
             this.atk.dmg = this.attack;
             this.def.armor = 1;

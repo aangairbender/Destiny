@@ -57,6 +57,13 @@ namespace Destiny
                         else ndir = 3;
                         break;
                     }
+                case Keys.R:
+                {
+                    Spider fef;
+                    fef = new Spider();
+                    world.placeUnit(fef);
+                    break;
+                }
                 case Keys.A:
                     {
                         np = Utils.movePoint(world.hero.location, world.hero.direction);
@@ -67,6 +74,7 @@ namespace Destiny
                             if (M.hp <= 0)
                             {
                                 world.map[np.X, np.Y].unitStanding = null;
+                                world.map[np.X, np.Y].passable = true;
                                 world.units.Remove(M);
                             }
                         }

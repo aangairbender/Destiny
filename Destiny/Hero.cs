@@ -18,10 +18,10 @@ namespace Destiny
             this.direction = 0;
             this.location = location;
             this.hp = 100;
-            this.attack = 5;
+            this.attack = 2;
             this.sprite = "player";
             heroBaseAttack = new AttackInfo();
-            heroBaseAttack.dmg = 5;
+            heroBaseAttack.dmg = 2;
             heroBaseDef = new DefendInfo();
             heroBaseDef.armor = 1;
         }

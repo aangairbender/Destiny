@@ -63,7 +63,7 @@ namespace Destiny
 
             updateCells();
         }
-        private void placeUnit(Unit unit)
+        public void placeUnit(Unit unit)
         {
             int ax, ay;
             do
@@ -99,8 +99,11 @@ namespace Destiny
                     if (map[i, j].unitStanding != null)
                     {
                         g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * 32, j * 32);
-                        //g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
-                        //g.FillRectangle(new SolidBrush(Color.Red), i * 32+2, j * 32, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
+                        if (map[i, j].unitStanding != hero)
+                        {
+                            g.DrawRectangle(new Pen(Color.Black), i * 32 + 2, j * 32, 28, 2);
+                            g.FillRectangle(new SolidBrush(Color.Red), i * 32 + 2, j * 32, 28 * ((Monster)map[i, j].unitStanding).hp / ((Monster)map[i, j].unitStanding).maxhp, 2);
+                        }
                     }
                 }
 
@@ -119,8 +122,7 @@ namespace Destiny
 
         public int calcDmg(AttackInfo atk,DefendInfo def)
         {
-            if(def.armor>=0)return Convert.ToInt32( atk.dmg*(0.06 * def.armor) / (1 + 0.06 * def.armor) );
-            else return Convert.ToInt32(atk.dmg * (1-Math.Pow(0.94,-def.armor)) );
+            return atk.dmg-def.armor;
         }
 
         public void updateCells()

@@ -10,12 +10,12 @@ namespace Destiny
     class Monster:Unit
     {
         public int hp;
+        public int maxhp;
         public int attack;
         public DefendInfo def;
         public AttackInfo atk;
-        public Monster(Point location)
+        public Monster()
         {
-            this.location = location;
             atk = new AttackInfo();
             def = new DefendInfo();
         }
