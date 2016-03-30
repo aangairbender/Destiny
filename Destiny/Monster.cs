@@ -11,9 +11,13 @@ namespace Destiny
     {
         public int hp;
         public int attack;
+        public DefendInfo def;
+        public AttackInfo atk;
         public Monster(Point location)
         {
             this.location = location;
+            atk = new AttackInfo();
+            def = new DefendInfo();
         }
     }
 }

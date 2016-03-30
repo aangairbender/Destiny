@@ -14,6 +14,8 @@ namespace Destiny
             this.attack = 1;
             this.hp = 1;
             this.direction = 0;
+            this.atk.dmg = this.attack;
+            this.def.armor = 1;
             this.sprite = "spider";
         }
         public override void makeMove(World world)

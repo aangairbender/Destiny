@@ -25,6 +25,7 @@ namespace Destiny
             world.map[px, py].unitStanding = null; 
             world.map[px, py].passable = true;
             int npx = world.hero.location.X, npy = world.hero.location.Y, ndir = dir;
+            Point np = new Point(px, py);
 
             switch (keyCode)
             {
@@ -58,7 +59,17 @@ namespace Destiny
                     }
                 case Keys.A:
                     {
-
+                        np = Utils.movePoint(world.hero.location, world.hero.direction);
+                        Monster M=(Monster)world.map[np.X,np.Y].unitStanding;
+                        if(M==null)break;
+                        {
+                            M.hp -= world.calcDmg(world.hero.heroBaseAttack, M.def);
+                            if (M.hp <= 0)
+                            {
+                                world.map[np.X, np.Y].unitStanding = null;
+                                world.units.Remove(M);
+                            }
+                        }
                         break;
                     }
                 default:
