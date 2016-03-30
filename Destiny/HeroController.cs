@@ -24,7 +24,7 @@ namespace Destiny
             int dir = world.hero.direction;
             world.map[px, py].unitStanding = null; 
             world.map[px, py].passable = true;
-            int npx = world.hero.location.X, npy = world.hero.location.Y, ndir = dir;
+            int npx = px, npy = py, ndir = dir;
             Point np = new Point(px, py);
 
             switch (keyCode)
@@ -79,14 +79,21 @@ namespace Destiny
                     }
             }
             world.hero.direction = ndir;
-            if (npx >= 0 && npy >= 0 && npx < world.map.width && npy <= world.map.height && world.map[npx, npy].passable)
+           if (npx >= 0 && npy >= 0 && npx < world.map.width && npy < world.map.height && world.map[npx, npy].passable)
             {
                 world.hero.setLocation(new Point(npx, npy));
                 world.map[npx, npy].unitStanding = world.hero;
                 world.map[npx, npy].passable = false;
             }
+            else if (npx != px || npy != py)
+            {
+                world.map[px, py].unitStanding = world.hero;
+                world.map[px, py].passable = false;
+                moveMade = false;
+            }
             else if (npx != px || npy != py) moveMade = false;
             return moveMade;
         }
+
     }
 }
