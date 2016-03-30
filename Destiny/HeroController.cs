@@ -64,9 +64,9 @@ namespace Destiny
                     world.placeUnit(fef);
                     break;
                 }
-                case Keys.T:
+                case Keys.G:
                 {
-                    world.hero.inventory.Add(new Sword1());
+                    world.hero.inventory.Add(new SwordElucidator());
                     break;
                 }
                 case Keys.Y:
@@ -81,6 +81,7 @@ namespace Destiny
                 }
                 case Keys.U:
                 {
+                    if (world.hero.slot[0] == null) break;
                     world.hero.slot[0].unequip(world.hero);
                     break;
                 }
@@ -107,6 +108,19 @@ namespace Destiny
                         {
                             world.map[np.X, np.Y].objStanding.activate();
                         }
+                        break;
+                    }
+                case Keys.I:
+                    {
+                        if (world.inventoryGUI.visible) world.inventoryGUI.hide();
+                        else world.inventoryGUI.show();
+                        moveMade = false;
+                        break;
+                    }
+                case Keys.T:
+                    {
+                        world.hero.inventory.AddRange(world.map[world.hero.location.X, world.hero.location.Y].itemsLying);
+                        world.map[world.hero.location.X, world.hero.location.Y].itemsLying.Clear();
                         break;
                     }
                 default:

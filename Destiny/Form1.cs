@@ -26,15 +26,12 @@ namespace Destiny
 
         void q()
         {
-            w.Draw(g);
+            w.draw(g, bmp.Width, bmp.Height);
 
             pictureBox1.Image = bmp;
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            q();
-        }
+
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -47,7 +44,31 @@ namespace Destiny
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (w.heroController.makeMove(e.KeyCode)) w.makeMoves();
+            w.inputController.keyDown(e);
+            q();
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            w.inputController.keyUp(e);
+            q();
+        }
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            w.inputController.mouseDown(e);
+            q();
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            w.inputController.mouseMove(e);
+            q();
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            w.inputController.mouseUp(e);
             q();
         }
 

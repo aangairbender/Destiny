@@ -23,5 +23,11 @@ namespace Destiny
                 --np.X;
             return np;
         }
+        public static String getSlotName(int i)
+        {
+            if (i == 0) return "Оружие";
+            if (i == 1) return "Броня";
+            return "Неизвестно";
+        }
     }
 }

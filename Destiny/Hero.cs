@@ -16,9 +16,10 @@ namespace Destiny
         public DefendInfo heroBaseDef;
         public List<Item> inventory;
         public List<Item> slot;
+        public String name;
         // 0 - Оружие
         // 1 - Броня
-        public Hero(Point location)
+        public Hero(Point location, String name)
         {
             inventory = new List<Item>();
             slot = new List<Item>();
@@ -30,6 +31,7 @@ namespace Destiny
             this.maxhp = hp;
             this.attack = 2;
             this.sprite = "player";
+            this.name = name;
             heroBaseAttack = new AttackInfo();
             heroBaseAttack.dmg = 2;
             heroBaseDef = new DefendInfo();
