@@ -93,8 +93,10 @@ namespace Destiny
             }
         }
 
-        public void attack(Unit unit, AttackInfo attackInfo)
+        public int calcDmg(AttackInfo atk,DefendInfo def)
         {
+            if(def.armor>=0)return Convert.ToInt32( atk.dmg*(0.06 * def.armor) / (1 + 0.06 * def.armor) );
+            else return Convert.ToInt32(atk.dmg * (1-Math.Pow(0.94,-def.armor)) );
         }
 
     }
