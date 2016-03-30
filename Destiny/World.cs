@@ -10,6 +10,7 @@ namespace Destiny
 {
     class World
     {
+        private const int cellSize = 32;
         public Map map;
         public List<Unit> units;
         public List<Obj> objects;
@@ -84,25 +85,25 @@ namespace Destiny
             for (int i = 0; i < map.getWidth(); ++i)
                 for (int j = 0; j < map.getHeight(); ++j)
                 {
-                    g.DrawImage(bc["tiles"][map[i, j].getTile()], i * 32, j * 32);
-                    if (map[i, j].hasDecoration()) g.DrawImage(bc["decorations"][map[i, j].getDecoration()], i * 32, j * 32);
+                    g.DrawImage(bc["tiles"][map[i, j].getTile()], i * cellSize, j * cellSize);
+                    if (map[i, j].hasDecoration()) g.DrawImage(bc["decorations"][map[i, j].getDecoration()], i * cellSize, j * cellSize);
                     
-                    if (map[i, j].itemsLying.Count > 1) g.DrawImage(bc["items"]["sack"], i * 32, j * 32);
-                    else if (map[i, j].itemsLying.Count == 1) g.DrawImage(bc["items"][map[i,j].itemsLying[0].sprite], i * 32, j * 32);
+                    if (map[i, j].itemsLying.Count > 1) g.DrawImage(bc["items"]["sack"], i * cellSize, j * cellSize);
+                    else if (map[i, j].itemsLying.Count == 1) g.DrawImage(bc["items"][map[i,j].itemsLying[0].sprite], i * cellSize, j * cellSize);
                     
                     if (map[i, j].objStanding != null)
                     {
-                        g.DrawImage(bc["objects"][map[i, j].objStanding.sprite], i * 32, j * 32);
-                        //g.DrawRectangle(new Pen(Color.Black), i * 32+2, j * 32, 28, 2);
-                        //g.FillRectangle(new SolidBrush(Color.Red), i * 32+2, j * 32, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
+                        g.DrawImage(bc["objects"][map[i, j].objStanding.sprite], i * cellSize, j * cellSize);
+                        //g.DrawRectangle(new Pen(Color.Black), i * cellSize+2, j * cellSize, 28, 2);
+                        //g.FillRectangle(new SolidBrush(Color.Red), i * cellSize+2, j * cellSize, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
                     }
                     if (map[i, j].unitStanding != null)
                     {
-                        g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * 32, j * 32);
+                        g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * cellSize, j * cellSize);
                         if (map[i, j].unitStanding != hero)
                         {
-                            g.DrawRectangle(new Pen(Color.Black), i * 32 + 2, j * 32, 28, 2);
-                            g.FillRectangle(new SolidBrush(Color.Red), i * 32 + 2, j * 32, 28 * ((Monster)map[i, j].unitStanding).hp / ((Monster)map[i, j].unitStanding).maxhp, 2);
+                            g.DrawRectangle(new Pen(Color.Black), i * cellSize + 2, j * cellSize, 28, 2);
+                            g.FillRectangle(new SolidBrush(Color.Red), i * cellSize + 2, j * cellSize, 28 * ((Monster)map[i, j].unitStanding).hp / ((Monster)map[i, j].unitStanding).maxhp, 2);
                         }
                     }
                 }
