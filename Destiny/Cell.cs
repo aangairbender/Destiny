@@ -13,6 +13,7 @@ namespace Destiny
         public String decoration;
         public List<Item> itemsLying;
         public Unit unitStanding;
+        public Obj objStanding;
 
         public Cell(String tile, String decoration, bool passable)
         {
@@ -20,6 +21,8 @@ namespace Destiny
             this.passable = passable;
             this.decoration = decoration;
             itemsLying = new List<Item>();
+            unitStanding = null;
+            objStanding = null;
         }
 
         public String getTile()
