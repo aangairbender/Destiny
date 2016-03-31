@@ -69,6 +69,11 @@ namespace Destiny
                     world.hero.inventory.Add(new SwordElucidator());
                     break;
                 }
+                case Keys.B:
+                {
+                    world.hero.inventory.Add(new HealthPotion());
+                    break;
+                }
                 case Keys.Y:
                 {
                     if(world.hero.inventory.Count==0)break;

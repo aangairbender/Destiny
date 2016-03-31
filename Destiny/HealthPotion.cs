@@ -8,9 +8,18 @@ namespace Destiny
 {
     class HealthPotion:Item
     {
+        public HealthPotion()
+        {
+            sprite = "health_potion";
+            equipable = false;
+            usable = true;
+            name = "Зелье лечения";
+            description = "+10 очков здоровья";
+        }
         public override void use(Hero hero)
         {
             hero.maxhp += 10;
+            hero.inventory.Remove(this);
         }
     }
 }

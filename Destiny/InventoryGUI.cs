@@ -62,12 +62,28 @@ namespace Destiny
                 
                 g.DrawString(Utils.getSlotName(i), elFont, slotBrush, listX + offset + width * (1.0f - 2.0f * padding) * padding, listY + listElHeight * i * 2 + (listElHeight - elBox.Height) / 2.0f);
                 String elName = "Пусто";
-                if (world.hero.slot[i] != null) elName = world.hero.slot[i].name;
+                if (world.hero.slot[i] != null)
+                {
+                    elName = world.hero.slot[i].name;
+                }
                 elBox = g.MeasureString(elName, elFont);
-                g.DrawRectangle(new Pen(Color.Black, 2), listX, listY + listElHeight * (i * 2 + 1), width * (1.0f - 2.0f * padding), listElHeight);
-                g.FillRectangle(new SolidBrush(Color.SandyBrown), listX, listY + listElHeight * (i * 2 + 1), width * (1.0f - 2.0f * padding), listElHeight);
+                if (world.hero.slot[i] == null)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, 2), listX, listY + listElHeight * (i * 2 + 1), width * (1.0f - 2.0f * padding), listElHeight);
+                    g.FillRectangle(new SolidBrush(Color.SandyBrown), listX, listY + listElHeight * (i * 2 + 1), width * (1.0f - 2.0f * padding), listElHeight);
+                    g.DrawString(elName, elFont, elBrush, listX + offset + width * (1.0f - 2.0f * padding) * padding, listY + listElHeight * (i * 2 + 1) + (listElHeight - elBox.Height) / 2.0f);
 
-                g.DrawString(elName, elFont, elBrush, listX + offset + width * (1.0f - 2.0f * padding) * padding, listY + listElHeight * (i * 2 + 1) + (listElHeight - elBox.Height) / 2.0f);
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(Color.Black, 2), listX, listY + listElHeight * (2*i+1), width * (1.0f - 2.0f * padding), listElHeight);
+                    g.FillRectangle(new SolidBrush(Color.SandyBrown), listX, listY + listElHeight * (2*i+1), width * (1.0f - 2.0f * padding), listElHeight);
+                    g.FillRectangle(new SolidBrush(Color.White), listX + offset, listY + listElHeight * (2 * i + 1) + (listElHeight - world.bc["items"][world.hero.slot[i].sprite].Height) / 2.0f, world.bc["items"][world.hero.slot[i].sprite].Width, world.bc["items"][world.hero.slot[i].sprite].Height);
+                    g.DrawImage(world.bc["items"][world.hero.slot[i].sprite], listX + offset, listY + listElHeight * (2 * i + 1) + (listElHeight - world.bc["items"][world.hero.slot[i].sprite].Height) / 2.0f);
+                    g.DrawRectangle(new Pen(Color.Black, 1), listX + offset, listY + listElHeight * (2 * i + 1) + (listElHeight - world.bc["items"][world.hero.slot[i].sprite].Height) / 2.0f, world.bc["items"][world.hero.slot[i].sprite].Width, world.bc["items"][world.hero.slot[i].sprite].Height);
+                    g.DrawString(elName, elFont, elBrush, listX + offset + world.bc["items"][world.hero.slot[i].sprite].Width + width * (1.0f - 2.0f * padding) * padding, listY + listElHeight * (2 * i + 1) + (listElHeight - elBox.Height) / 2.0f);
+               
+                }
                 if (world.inputController.mouseDowned)
                 {
                     float tx = listX;
@@ -104,14 +120,14 @@ namespace Destiny
             Font descFont = new Font("Arial", 14);
             g.DrawString(chosenItem.description, descFont, new SolidBrush(Color.DarkCyan),new RectangleF(descX, descY, width*(1.0f-2.0f*padding),height*(1.0f-3.0f*padding-buttonHeight)));
 
-            if (chosenItem.canEquip(world.hero) && !(world.hero.slot[chosenItem.slot]!=null && world.hero.slot[chosenItem.slot]!=chosenItem))
+            if (chosenItem.equipable && chosenItem.canEquip(world.hero) && !(world.hero.slot[chosenItem.slot]!=null && world.hero.slot[chosenItem.slot]!=chosenItem))
             {
                 float btn1X = x + width * padding2;
                 float btn1Y = y + height*(1.0f - padding - buttonHeight);
                 String text1 = "Надеть";
                 if (chosenItem.canEquip(world.hero) && world.hero.slot[chosenItem.slot] == chosenItem) text1 = "Снять";
-                drawButton(g, btn1X, btn1Y, buttonWidth * width, buttonHeight * height, text1);
-                if (world.inputController.mouseDowned && new RectangleF(btn1X, btn1Y, buttonWidth*width, buttonHeight*height).Contains(world.inputController.mouseLocation))
+                RectangleF btn = drawButton(g, btn1X, btn1Y, buttonWidth * width, buttonHeight * height, text1);
+                if (world.inputController.mouseDowned && btn.Contains(world.inputController.mouseLocation))
                 {
                     if (text1 == "Надеть")
                     {
@@ -121,13 +137,26 @@ namespace Destiny
                     {
                         chosenItem.unequip(world.hero);
                     }
+                    chosenItem = null;
+                }
+            }
+            else if (chosenItem.usable && chosenItem.canUse(world.hero))
+            {
+                float btn1X = x + width * padding2;
+                float btn1Y = y + height * (1.0f - padding - buttonHeight);
+                String text1 = "Использовать";
+                RectangleF btn = drawButton(g, btn1X, btn1Y, buttonWidth * width, buttonHeight * height, text1);
+                if (world.inputController.mouseDowned && btn.Contains(world.inputController.mouseLocation))
+                {
+                    chosenItem.use(world.hero);
+                    chosenItem = null;
                 }
             }
             float btn2X = x + width * (1.0f - padding2) - buttonWidth*width;
             float btn2Y = y + height * (1.0f - padding - buttonHeight);
             String text2 = "Выбросить";
-            drawButton(g, btn2X, btn2Y, buttonWidth * width, buttonHeight * height, text2);
-            if (world.inputController.mouseDowned && new RectangleF(btn2X, btn2Y, buttonWidth*width, buttonHeight*height).Contains(world.inputController.mouseLocation))
+            RectangleF btn2 = drawButton(g, btn2X, btn2Y, buttonWidth * width, buttonHeight * height, text2);
+            if (world.inputController.mouseDowned && btn2.Contains(world.inputController.mouseLocation))
             {
                 if (chosenItem.canEquip(world.hero) && world.hero.slot[chosenItem.slot] == chosenItem)
                 {
@@ -139,7 +168,7 @@ namespace Destiny
             }
         }
 
-        private void drawButton(Graphics g, float x, float y, float width, float height, String text)
+        private RectangleF drawButton(Graphics g, float x, float y, float width, float height, String text)
         {
             Font textFont = new Font("Arial", 16);
             SizeF textBox = g.MeasureString(text, textFont);
@@ -153,7 +182,8 @@ namespace Destiny
             }
             g.FillRectangle(new SolidBrush(Color.LightCoral), x, y, width, height);
             g.DrawRectangle(new Pen(Color.Black,2), x, y, width, height);
-            g.DrawString(text, textFont, new SolidBrush(Color.Black), x + (width - textBox.Width) / 2.0f, y + (height - textBox.Height) / 2.0f); 
+            g.DrawString(text, textFont, new SolidBrush(Color.Black), x + (width - textBox.Width) / 2.0f, y + (height - textBox.Height) / 2.0f);
+            return new RectangleF(x, y, width, height);
         }
 
         private void drawItemList(Graphics g, float x, float y, float width, float height)
