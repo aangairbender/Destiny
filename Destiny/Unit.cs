@@ -10,6 +10,7 @@ namespace Destiny
     class Unit 
     {
        public Point location;
+       public Point oldLocation;
        public int direction;
         // 0 - верх
         // 1 - право
@@ -23,6 +24,7 @@ namespace Destiny
        }
        public void setLocation(Point newLocation)
        {
+           oldLocation = location;
            this.location = newLocation;
        }
        

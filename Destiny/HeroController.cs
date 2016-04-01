@@ -148,6 +148,9 @@ namespace Destiny
                 moveMade = false;
             }
             else if (npx != px || npy != py) moveMade = false;
+
+           if (moveMade) world.heroMoveTick = world.tick;
+
             return moveMade;
         }
 

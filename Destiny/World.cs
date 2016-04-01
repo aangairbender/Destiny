@@ -10,6 +10,7 @@ namespace Destiny
 {
     class World
     {
+        public const int moveTime = 5;
         public const int cellSize = 32;
         public Map map;
         public List<Unit> units;
@@ -22,9 +23,12 @@ namespace Destiny
         public HeroController heroController;
         public InventoryGUI inventoryGUI;
         public InputController inputController;
+        public int tick;
+        public int heroMoveTick;
         
         public World(int width, int height)
         {
+            tick = 0;
             inputController = new InputController(this);
             idManager = new IdManager();
             rand = new Random(DateTime.Now.Millisecond);
@@ -83,8 +87,13 @@ namespace Destiny
         }
 
 
-        public void draw(Graphics g, int width, int height)
+        public void draw(Graphics g, int width, int height, int tick)
         {
+            this.tick = tick;
+
+            int heroMoveDelta = tick - heroMoveTick;
+            float curToOld = Math.Min(1.0f, 1.0f * heroMoveDelta / moveTime);
+
             g.Clear(Color.Black);
             for (int i = 0; i < map.getWidth(); ++i)
                 for (int j = 0; j < map.getHeight(); ++j)
@@ -101,23 +110,33 @@ namespace Destiny
                         //g.DrawRectangle(new Pen(Color.Black), i * cellSize+2, j * cellSize, 28, 2);
                         //g.FillRectangle(new SolidBrush(Color.Red), i * cellSize+2, j * cellSize, 28 * map[i,j].unitStanding / (map[i,j].unitStanding.astr*10), 2);
                     }
-                    if (map[i, j].unitStanding != null)
-                    {
-                        g.DrawImage(bc["actors"][map[i, j].unitStanding.getSprite()+map[i,j].unitStanding.direction.ToString()], i * cellSize, j * cellSize);
-                        if (map[i, j].unitStanding != hero)
-                        {
-                            g.DrawRectangle(new Pen(Color.Black), i * cellSize + 2, j * cellSize, cellSize - 4, 2);
-                            g.FillRectangle(new SolidBrush(Color.Red), i * cellSize + 2, j * cellSize, (cellSize - 4) * ((Monster)map[i, j].unitStanding).hp / ((Monster)map[i, j].unitStanding).maxhp, 2);
-                        }else
-                        {
-                            g.DrawRectangle(new Pen(Color.Black), i * cellSize + 2, j * cellSize, cellSize - 4, 2);
-                            g.FillRectangle(new SolidBrush(Color.Red), i * cellSize + 2, j * cellSize, (cellSize - 4) * ((Hero)map[i, j].unitStanding).hp / ((Hero)map[i, j].unitStanding).maxhp, 2);
-                        }
-                    }
+                    
                 }
+            foreach(Unit u in units)
+            {
+                int X = u.location.X * cellSize;
+                int Y = u.location.Y * cellSize;
+                int oldX = u.oldLocation.X * cellSize;
+                int oldY = u.oldLocation.Y * cellSize;
+                float drawX = X * curToOld + oldX * (1.0f - curToOld);
+                float drawY = Y * curToOld + oldY * (1.0f - curToOld);
+                g.DrawImage(bc["actors"][u.getSprite() + u.direction.ToString()], drawX, drawY);
+                if (u != hero)
+                {
+                    g.DrawRectangle(new Pen(Color.Black), drawX + 2, drawY, cellSize - 4, 2);
+                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Monster)u).hp / ((Monster)u).maxhp, 2);
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(Color.Black), drawX + 2, drawY, cellSize - 4, 2);
+                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Hero)u).hp / ((Hero)u).maxhp, 2);
+                }
+                
+            }
+
             if (inventoryGUI.visible) inventoryGUI.draw(g, width, height);
             //g.DrawString(hero.hp.ToString() + "/" + (hero.astr * 10).ToString(), new Font("Arial", 16), new SolidBrush(Color.Red), new PointF(0, 0));
-
+            //g.DrawString(heroMoveDelta.ToString(), new Font("Arial", 16), new SolidBrush(Color.Black), 0, 0);
         }
 
         public void makeMoves()
