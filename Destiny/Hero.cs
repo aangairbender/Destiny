@@ -27,6 +27,7 @@ namespace Destiny
             slot.Add(null);
             this.direction = 0;
             this.location = location;
+            this.oldLocation = location;
             this.hp = 100;
             this.maxhp = hp;
             this.attack = 2;
