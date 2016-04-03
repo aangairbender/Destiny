@@ -11,11 +11,10 @@ namespace Destiny
     {
         public Spider()
         {
-            this.attack = 1;
             this.hp = 50;
             this.maxhp = hp;
             this.direction = 0;
-            this.atk.dmg = this.attack;
+            this.atk.dmg = 1;
             this.def.armor = 1;
             this.sprite = "spider";
         }

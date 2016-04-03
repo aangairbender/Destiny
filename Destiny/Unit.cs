@@ -22,6 +22,7 @@ namespace Destiny
        public void attack(Unit target)
        {
            target.def.hp -= this.atk.dmg;
+           
        }
        public Point getLocation()
        {
