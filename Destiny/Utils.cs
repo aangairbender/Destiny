@@ -30,9 +30,17 @@ namespace Destiny
             return "Неизвестно";
         }
 
-        public static int dist(Unit u1, Unit u2)
+        public static int dist(Point u1, Point u2)
         {
-            return Math.Abs(u1.location.X - u2.location.Y) + Math.Abs(u1.location.Y - u2.location.Y);
+            return Math.Abs(u1.X - u2.X) + Math.Abs(u1.Y - u2.Y);
+        }
+        public static int getDirection(Point offset)
+        {
+            if (offset.X == 1 && offset.Y == 0) return 1;
+            else if (offset.X == -1 && offset.Y == 0) return 3;
+            else if (offset.X == 0 && offset.Y == 1) return 2;
+            else if (offset.X == 0 && offset.Y == -1) return 0;
+            else return 4;
         }
     }
 }

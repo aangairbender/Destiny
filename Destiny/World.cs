@@ -155,13 +155,14 @@ namespace Destiny
                 if(units[i].def.hp<=0)
                 {
                     map[units[i].location.X, units[i].location.Y].unitStanding = null;
-                    map[units[i].location.X, units[i].location.Y].passable = false;
+                    map[units[i].location.X, units[i].location.Y].passable = true;
                     units.Remove(units[i]);
                     i--;
                 }
             }
             foreach (var a in units)
             {
+                if (a == hero) continue;
                 a.makeMove(this);
             }
             updateCells();
