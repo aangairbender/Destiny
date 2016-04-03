@@ -29,5 +29,10 @@ namespace Destiny
             if (i == 1) return "Броня";
             return "Неизвестно";
         }
+
+        public static int dist(Unit u1, Unit u2)
+        {
+            return Math.Abs(u1.location.X - u2.location.Y) + Math.Abs(u1.location.Y - u2.location.Y);
+        }
     }
 }

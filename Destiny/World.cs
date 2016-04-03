@@ -129,12 +129,12 @@ namespace Destiny
                 if (u != hero)
                 {
                     g.DrawRectangle(new Pen(Color.Black), drawX + 2, drawY, cellSize - 4, 2);
-                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Monster)u).hp / ((Monster)u).maxhp, 2);
+                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Monster)u).def.hp / ((Monster)u).def.maxhp, 2);
                 }
                 else
                 {
                     g.DrawRectangle(new Pen(Color.Black), drawX + 2, drawY, cellSize - 4, 2);
-                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Hero)u).hp / ((Hero)u).maxhp, 2);
+                    g.FillRectangle(new SolidBrush(Color.Red), drawX + 2, drawY, (cellSize - 4) * ((Hero)u).def.hp / ((Hero)u).def.maxhp, 2);
                 }
                 
             }
@@ -150,7 +150,17 @@ namespace Destiny
 
         public void makeMoves()
         {
-            foreach(var a in units)
+            for (int i = 0; i < units.Count; ++i)
+            {
+                if(units[i].def.hp<=0)
+                {
+                    map[units[i].location.X, units[i].location.Y].unitStanding = null;
+                    map[units[i].location.X, units[i].location.Y].passable = false;
+                    units.Remove(units[i]);
+                    i--;
+                }
+            }
+            foreach (var a in units)
             {
                 a.makeMove(this);
             }
