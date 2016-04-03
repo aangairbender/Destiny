@@ -18,7 +18,12 @@ namespace Destiny
 
         public bool makeMove(Keys keyCode)
         {
+            int heroMoveDelta = world.tick - world.heroMoveTick;
+            if (heroMoveDelta >= World.moveTime) world.moveAvailable = true;
+            else world.moveAvailable = false;
+
             if (!world.moveAvailable) return false;
+
             bool moveMade = true;
             int px = world.hero.location.X;
             int py = world.hero.location.Y;
