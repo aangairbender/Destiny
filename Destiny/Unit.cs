@@ -22,6 +22,7 @@ namespace Destiny
        public void attack(Unit target)
        {
            int curDmg = this.atk.dmg;
+       //    if (atk.crit == 0) return;
            if (Utils.random(100) <= atk.crit) curDmg *= 2;
            target.def.hp -= curDmg- target.def.armor;
            

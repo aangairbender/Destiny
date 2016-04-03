@@ -33,7 +33,7 @@ namespace Destiny
         {
             hero.slot[0] = this;
             hero.atk.dmg += dmgBonus;
-            hero.atk.dmg += critBonus;
+            hero.atk.crit += critBonus;
             if (hero.inventory.Contains(this)) hero.inventory.Remove(this);
         }
         public override void unequip(Hero hero)

@@ -9,7 +9,7 @@ namespace Destiny
 {
     class Utils
     {
-        static Random rnd;
+        static Random rnd=new Random();
         public static int random(int top)
         {
             return rnd.Next(1, top);
