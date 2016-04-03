@@ -10,5 +10,6 @@ namespace Destiny
     {
         public int armor;
         public int hp;
+        public int maxhp;
     }
 }

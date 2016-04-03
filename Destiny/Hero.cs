@@ -22,19 +22,22 @@ namespace Destiny
         {
             inventory = new List<Item>();
             slot = new List<Item>();
+            atk = new AttackInfo();
+            def = new DefendInfo();
             slot.Add(null);
             slot.Add(null);
             this.direction = 0;
             this.location = location;
             this.oldLocation = location;
-            this.hp = 100;
-            this.maxhp = hp;
+            
             this.sprite = "player";
             this.name = name;
-            heroBaseAttack = new AttackInfo();
-            heroBaseAttack.dmg = 2;
-            heroBaseDef = new DefendInfo();
-            heroBaseDef.armor = 1;
+            
+            atk.dmg = 2;
+            def.armor = 1;
+
+            def.hp = 100;
+            def.maxhp = def.hp;
         }
     }
 }

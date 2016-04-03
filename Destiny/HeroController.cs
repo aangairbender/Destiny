@@ -99,17 +99,7 @@ namespace Destiny
                     {
                         np = Utils.movePoint(world.hero.location, world.hero.direction);
                         Monster M=(Monster)world.map[np.X,np.Y].unitStanding;
-                       // if(M!=null)Hero.att
-                        if(M==null)break;
-                        {
-                            M.hp -= world.calcDmg(world.hero.heroBaseAttack, M.def);
-                            if (M.hp <= 0)
-                            {
-                                world.map[np.X, np.Y].unitStanding = null;
-                                world.map[np.X, np.Y].passable = true;
-                                world.units.Remove(M);
-                            }
-                        }
+                        if (M != null) world.hero.attack(M);
                         break;
                     }
                 case Keys.E:

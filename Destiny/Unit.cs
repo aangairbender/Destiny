@@ -21,7 +21,7 @@ namespace Destiny
        public String sprite;
        public void attack(Unit target)
        {
-           target.def.hp -= this.atk.dmg;
+           target.def.hp -= this.atk.dmg - target.def.armor;
            
        }
        public Point getLocation()
