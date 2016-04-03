@@ -10,7 +10,7 @@ namespace Destiny
 {
     class World
     {
-        public const int moveTime = 5;
+        public const int moveTime = 4;
         public const int cellSize = 32;
         public Map map;
         public List<Unit> units;
