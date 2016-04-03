@@ -18,7 +18,7 @@ namespace Destiny
         }
         public override void use(Hero hero)
         {
-            hero.maxhp += 10;
+            hero.def.maxhp += 10;
             hero.inventory.Remove(this);
         }
     }

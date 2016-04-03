@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 namespace Destiny
 {
     class Hero:Unit
-    {
-        public int hp;
-        public int maxhp;
-        public AttackInfo heroBaseAttack;
-        public DefendInfo heroBaseDef;
+    { 
         public List<Item> inventory;
         public List<Item> slot;
         public String name;

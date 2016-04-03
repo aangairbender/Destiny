@@ -9,8 +9,6 @@ namespace Destiny
 {
     class Monster:Unit
     {
-        public int hp;
-        public int maxhp;
         
         public Monster()
         {

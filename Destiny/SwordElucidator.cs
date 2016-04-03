@@ -31,13 +31,13 @@ namespace Destiny
         public override void equip(Hero hero)
         {
             hero.slot[0] = this;
-            hero.heroBaseAttack.dmg += dmgBonus;
+            hero.atk.dmg += dmgBonus;
             if (hero.inventory.Contains(this)) hero.inventory.Remove(this);
         }
         public override void unequip(Hero hero)
         {
             hero.slot[0] = null;
-            hero.heroBaseAttack.dmg -= dmgBonus;
+            hero.atk.dmg -= dmgBonus;
             hero.inventory.Add(this);
           
         }
