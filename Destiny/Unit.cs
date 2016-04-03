@@ -12,12 +12,17 @@ namespace Destiny
        public Point location;
        public Point oldLocation;
        public int direction;
+       public DefendInfo def;
+       public AttackInfo atk;
         // 0 - верх
         // 1 - право
         // 2 - низ
         // 3 - лево
        public String sprite;
-       
+       public void attack(Unit target)
+       {
+           target.def.hp -= this.atk.dmg;
+       }
        public Point getLocation()
        {
            return location;
