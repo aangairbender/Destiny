@@ -21,7 +21,9 @@ namespace Destiny
        public String sprite;
        public void attack(Unit target)
        {
-           target.def.hp -= this.atk.dmg - target.def.armor;
+           int curDmg = this.atk.dmg;
+           if (Utils.random(100) <= atk.crit) curDmg *= 2;
+           target.def.hp -= curDmg- target.def.armor;
            
        }
        public Point getLocation()

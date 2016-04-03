@@ -9,6 +9,11 @@ namespace Destiny
 {
     class Utils
     {
+        static Random rnd;
+        public static int random(int top)
+        {
+            return rnd.Next(1, top);
+        }
         public static Point movePoint(Point old, int dir)
         {
             Point np = new Point(old.X,old.Y);
