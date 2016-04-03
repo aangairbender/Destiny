@@ -11,9 +11,7 @@ namespace Destiny
     {
         public int hp;
         public int maxhp;
-        public int attack;
-        public DefendInfo def;
-        public AttackInfo atk;
+        
         public Monster()
         {
             atk = new AttackInfo();

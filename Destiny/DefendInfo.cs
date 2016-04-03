@@ -9,5 +9,6 @@ namespace Destiny
     class DefendInfo
     {
         public int armor;
+        public int hp;
     }
 }

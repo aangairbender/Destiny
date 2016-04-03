@@ -11,7 +11,6 @@ namespace Destiny
     {
         public int hp;
         public int maxhp;
-        public int attack;
         public AttackInfo heroBaseAttack;
         public DefendInfo heroBaseDef;
         public List<Item> inventory;
@@ -30,7 +29,6 @@ namespace Destiny
             this.oldLocation = location;
             this.hp = 100;
             this.maxhp = hp;
-            this.attack = 2;
             this.sprite = "player";
             this.name = name;
             heroBaseAttack = new AttackInfo();

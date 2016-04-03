@@ -94,6 +94,7 @@ namespace Destiny
                     {
                         np = Utils.movePoint(world.hero.location, world.hero.direction);
                         Monster M=(Monster)world.map[np.X,np.Y].unitStanding;
+                       // if(M!=null)Hero.att
                         if(M==null)break;
                         {
                             M.hp -= world.calcDmg(world.hero.heroBaseAttack, M.def);
