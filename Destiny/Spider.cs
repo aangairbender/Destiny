@@ -14,7 +14,7 @@ namespace Destiny
             this.def.hp = 10;
             this.def.maxhp = def.hp;
             this.direction = 0;
-            this.atk.dmg = 1;
+            this.atk.dmg = 2;
             this.def.armor = 0;
             this.sprite = "spider";
         }
@@ -22,28 +22,35 @@ namespace Destiny
         {
             int d = Utils.dist(world.hero.location, this.location);
             if (d > 5) return;
-            for (int i = -1; i <= 1; ++i)
-                for (int j = -1; j <= 1; ++j)
-                    if(Math.Abs(i)+Math.Abs(j)==1)
-                    {
-                      
-                        if(Math.Abs(world.hero.location.X-this.location.X-i)+Math.Abs(world.hero.location.Y-this.location.Y-j)==d-1 && (world.map[this.location.X+i, this.location.Y+j].passable || world.map[this.location.X+i,this.location.Y+j].unitStanding==world.hero))
+
+            if (d == 1 && Utils.getDirection(new Point(world.hero.location.X - this.location.X, world.hero.location.Y - this.location.Y)) == this.direction)
+            {
+                attack(world.hero);
+            } else 
+            {
+                for (int i = -1; i <= 1; ++i)
+                    for (int j = -1; j <= 1; ++j)
+                        if (Math.Abs(i) + Math.Abs(j) == 1)
                         {
-                            world.map[this.location.X, this.location.Y].unitStanding = null;
-                            world.map[this.location.X, this.location.Y].passable = true;
-                            Point pos = Utils.movePoint(this.location, this.direction);
-                            if (Utils.dist(pos, new Point(this.location.X + i, this.location.Y + j)) == 0 && world.map[this.location.X + i, this.location.Y + j].passable)
-                                this.setLocation(new Point(this.location.X + i, this.location.Y + j));
-                            else
+
+                            if (Math.Abs(world.hero.location.X - this.location.X - i) + Math.Abs(world.hero.location.Y - this.location.Y - j) == d - 1 && (world.map[this.location.X + i, this.location.Y + j].passable || world.map[this.location.X + i, this.location.Y + j].unitStanding == world.hero))
                             {
-                                this.direction = Utils.getDirection(new Point(i, j));
-                                this.setLocation(this.location);
+                                world.map[this.location.X, this.location.Y].unitStanding = null;
+                                world.map[this.location.X, this.location.Y].passable = true;
+                                Point pos = Utils.movePoint(this.location, this.direction);
+                                if (Utils.dist(pos, new Point(this.location.X + i, this.location.Y + j)) == 0 && world.map[this.location.X + i, this.location.Y + j].passable)
+                                    this.setLocation(new Point(this.location.X + i, this.location.Y + j));
+                                else
+                                {
+                                    this.direction = Utils.getDirection(new Point(i, j));
+                                    this.setLocation(this.location);
+                                }
+                                world.map[this.location.X, this.location.Y].unitStanding = this;
+                                world.map[this.location.X, this.location.Y].passable = false;
+                                return;
                             }
-                            world.map[this.location.X, this.location.Y].unitStanding = this;
-                            world.map[this.location.X, this.location.Y].passable = false;
-                            return;
                         }
-                    }
+            }
             this.setLocation(this.location);
         }
 

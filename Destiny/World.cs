@@ -160,6 +160,11 @@ namespace Destiny
                     i--;
                 }
             }
+            if(!units.Contains(hero))
+            {
+                MessageBox.Show("gg");
+                Application.Exit();
+            }
             foreach (var a in units)
             {
                 if (a == hero) continue;
