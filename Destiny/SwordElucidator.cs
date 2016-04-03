@@ -39,6 +39,7 @@ namespace Destiny
             hero.slot[0] = null;
             hero.heroBaseAttack.dmg -= dmgBonus;
             hero.inventory.Add(this);
+          
         }
         public override void use(Hero hero)
         {
