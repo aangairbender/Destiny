@@ -25,6 +25,7 @@ namespace Destiny
        public void setLocation(Point newLocation)
        {
            oldLocation = location;
+
            this.location = newLocation;
        }
        

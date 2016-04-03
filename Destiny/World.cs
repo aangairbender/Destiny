@@ -25,9 +25,11 @@ namespace Destiny
         public InputController inputController;
         public int tick;
         public int heroMoveTick;
+        public bool moveAvailable;
         
         public World(int width, int height)
         {
+            moveAvailable = true;
             tick = 0;
             inputController = new InputController(this);
             idManager = new IdManager();
@@ -79,8 +81,9 @@ namespace Destiny
             {
                 ax = rand.Next(0, map.getWidth());
                 ay = rand.Next(0, map.getHeight());
-            } while (!map[ax, ay].isPassable());
+            } while (!(map[ax, ay].isPassable() && map[ax,ay].unitStanding == null));
             unit.setLocation(new Point(ax, ay));
+            unit.oldLocation = unit.location;
             units.Add(unit);
             map[ax, ay].unitStanding = unit;
             map[ax, ay].passable = false;
@@ -93,6 +96,8 @@ namespace Destiny
 
             int heroMoveDelta = tick - heroMoveTick;
             float curToOld = Math.Min(1.0f, 1.0f * heroMoveDelta / moveTime);
+            if (heroMoveDelta >= moveTime) moveAvailable = true;
+            else moveAvailable = false;
 
             g.Clear(Color.Black);
             for (int i = 0; i < map.getWidth(); ++i)
@@ -135,6 +140,10 @@ namespace Destiny
             }
 
             if (inventoryGUI.visible) inventoryGUI.draw(g, width, height);
+            g.DrawString(moveAvailable.ToString(), new Font("Arial", 16), new SolidBrush(Color.Black), 0, 0);
+            g.DrawString(tick.ToString(), new Font("Arial", 16), new SolidBrush(Color.Black), 0, 20);
+            g.DrawString(heroMoveTick.ToString(), new Font("Arial", 16), new SolidBrush(Color.Black), 0, 40);
+           
             //g.DrawString(hero.hp.ToString() + "/" + (hero.astr * 10).ToString(), new Font("Arial", 16), new SolidBrush(Color.Red), new PointF(0, 0));
             //g.DrawString(heroMoveDelta.ToString(), new Font("Arial", 16), new SolidBrush(Color.Black), 0, 0);
         }
@@ -155,6 +164,11 @@ namespace Destiny
 
         public void updateCells()
         {
+            for (int i = 0; i < map.width; ++i)
+                for (int j = 0; j < map.height; ++j)
+                    map[i, j].unitStanding = null;
+            foreach (Unit u in units)
+                map[u.location.X, u.location.Y].unitStanding = u;
             for (int i = 0; i < map.width; ++i)
                 for (int j = 0; j < map.height; ++j)
                 {

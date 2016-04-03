@@ -18,6 +18,7 @@ namespace Destiny
 
         public bool makeMove(Keys keyCode)
         {
+            if (!world.moveAvailable) return false;
             bool moveMade = true;
             int px = world.hero.location.X;
             int py = world.hero.location.Y;
@@ -59,8 +60,7 @@ namespace Destiny
                     }
                 case Keys.R:
                 {
-                    Spider fef;
-                    fef = new Spider();
+                    Spider fef = new Spider();
                     world.placeUnit(fef);
                     break;
                 }
@@ -135,19 +135,19 @@ namespace Destiny
                     }
             }
             world.hero.direction = ndir;
-           if (npx >= 0 && npy >= 0 && npx < world.map.width && npy < world.map.height && world.map[npx, npy].passable)
+            if (dir == ndir && npx >= 0 && npy >= 0 && npx < world.map.width && npy < world.map.height && world.map[npx, npy].passable)
             {
                 world.hero.setLocation(new Point(npx, npy));
                 world.map[npx, npy].unitStanding = world.hero;
                 world.map[npx, npy].passable = false;
             }
-            else if (npx != px || npy != py)
+            else
             {
-                world.map[px, py].unitStanding = world.hero;
-                world.map[px, py].passable = false;
-                moveMade = false;
+                world.hero.setLocation(new Point(px, py));
+                 world.map[px, py].unitStanding = world.hero;
+                 world.map[px, py].passable = false;
+                if (dir == ndir) moveMade = false;
             }
-            else if (npx != px || npy != py) moveMade = false;
 
            if (moveMade) world.heroMoveTick = world.tick;
 
